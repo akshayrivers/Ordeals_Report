@@ -1,0 +1,49 @@
+student_id,class,session,subject,f1,f2,f3,f4,f5,f6,fa_total,co_curricular,summative,subject_total,grand_total,grade,remark,source
+Student_01,8,2023-24,English,5,5,5,5,5,5,30,20,30,80,434,A+,,sheet3:6
+Student_01,8,2023-24,Mathematics,5,5,5,5,5,5,30,20,31,81,434,A+,,sheet3:6
+Student_01,8,2023-24,Science,5,5,5,5,5,5,30,20,37,87,434,A+,,sheet3:6
+Student_01,8,2023-24,Social Science,5,5,5,5,5,5,30,20,39,89,434,A+,,sheet3:6
+Student_01,8,2023-24,Urdu/Hindi,5,5,5,5,5,5,30,20,47,97,434,A+,,sheet3:6
+Student_01,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,434,A+,,sheet3:6
+Student_02,8,2023-24,English,4,4,4,4,4,5,25,19,26,70,357,A,,sheet3:7
+Student_02,8,2023-24,Mathematics,4,4,4,5,4,4,25,19,26,70,357,A,,sheet3:7
+Student_02,8,2023-24,Science,4,4,4,4,4,5,25,19,31,75,357,A,,sheet3:7
+Student_02,8,2023-24,Social Science,4,4,4,4,4,5,25,19,33,77,357,A,,sheet3:7
+Student_02,8,2023-24,Urdu/Hindi,4,4,4,4,4,5,25,19,21,65,357,A,,sheet3:7
+Student_02,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,357,A,,sheet3:7
+Student_03,8,2023-24,English,4,4,4,5,4,4,25,19,23,67,351,A,,sheet3:8
+Student_03,8,2023-24,Mathematics,4,4,4,4,4,5,25,19,29,73,351,A,,sheet3:8
+Student_03,8,2023-24,Science,4,4,4,5,4,4,25,19,29,73,351,A,,sheet3:8
+Student_03,8,2023-24,Social Science,4,4,4,5,4,4,25,19,23,67,351,A,,sheet3:8
+Student_03,8,2023-24,Urdu/Hindi,4,4,4,5,4,4,25,19,27,71,351,A,,sheet3:8
+Student_03,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,351,A,,sheet3:8
+Student_04,8,2023-24,English,5,5,5,4,4,5,28,20,28,76,388,A,,sheet3:9
+Student_04,8,2023-24,Mathematics,5,5,5,5,5,4,29,20,29,78,388,A,,sheet3:9
+Student_04,8,2023-24,Science,5,5,5,4,4,4,27,20,29,76,388,A,,sheet3:9
+Student_04,8,2023-24,Social Science,5,5,5,4,4,4,27,20,34,81,388,A,,sheet3:9
+Student_04,8,2023-24,Urdu/Hindi,5,5,5,4,4,4,27,20,30,77,388,A,,sheet3:9
+Student_04,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,388,A,,sheet3:9
+Student_05,8,2023-24,English,5,4,5,4,4,5,27,19,28,74,384,A,,sheet3:10
+Student_05,8,2023-24,Mathematics,5,5,5,4,4,5,28,19,30,77,384,A,,sheet3:10
+Student_05,8,2023-24,Science,5,4,5,4,4,5,27,19,33,79,384,A,,sheet3:10
+Student_05,8,2023-24,Social Science,5,4,5,4,4,5,27,19,32,78,384,A,,sheet3:10
+Student_05,8,2023-24,Urdu/Hindi,5,4,5,4,4,5,27,19,30,76,384,A,,sheet3:10
+Student_05,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,384,A,,sheet3:10
+Student_06,8,2023-24,English,3,4,4,4,5,4,24,19,20,63,341,B,,sheet3:11
+Student_06,8,2023-24,Mathematics,4,4,4,4,4,4,24,19,23,66,341,B,,sheet3:11
+Student_06,8,2023-24,Science,3,4,4,4,5,4,24,19,30,73,341,B,,sheet3:11
+Student_06,8,2023-24,Social Science,3,4,4,4,5,4,24,19,22,65,341,B,,sheet3:11
+Student_06,8,2023-24,Urdu/Hindi,4,4,4,4,5,4,25,19,30,74,341,B,,sheet3:11
+Student_06,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,341,B,,sheet3:11
+Student_07,8,2023-24,English,4,3,4,4,5,4,24,19,21,64,342,B,,sheet3:12
+Student_07,8,2023-24,Mathematics,4,4,4,4,4,4,24,19,29,72,342,B,,sheet3:12
+Student_07,8,2023-24,Science,4,3,4,4,5,4,24,19,26,69,342,B,,sheet3:12
+Student_07,8,2023-24,Social Science,4,3,4,4,5,4,24,19,23,66,342,B,,sheet3:12
+Student_07,8,2023-24,Urdu/Hindi,4,4,4,4,5,4,25,19,27,71,342,B,,sheet3:12
+Student_07,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,342,B,,sheet3:12
+Student_08,8,2023-24,English,4,3,3,4,4,5,23,19,28,70,344,B,,sheet3:13
+Student_08,8,2023-24,Mathematics,4,4,4,4,4,4,24,19,25,68,344,B,,sheet3:13
+Student_08,8,2023-24,Science,4,3,3,4,4,5,23,19,30,72,344,B,,sheet3:13
+Student_08,8,2023-24,Social Science,4,3,3,4,4,5,23,19,32,74,344,B,,sheet3:13
+Student_08,8,2023-24,Urdu/Hindi,4,3,3,4,4,5,23,19,18,60,344,B,,sheet3:13
+Student_08,8,2023-24,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,344,B,,sheet3:13
