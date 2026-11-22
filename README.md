@@ -18,6 +18,12 @@ Built 22 November 2026. The page runs on this computer and does not upload marks
 
 Demo exam dates are labeled demo. The workbook in `local/` has no exam-date column, so those dates were not read from it.
 
+## Screen recording
+
+[The four pages, about three minutes](recording/ms-yug-flow.mp4). Recorded 22 November 2026 for Suresh Kumar at Govt. Middle School Yug, Udhampur.
+
+The clip shows the demo classes and the real class 8 register. Dummy rows are made up. `data.csv` is the real class 8 extract.
+
 ## Run
 
 ```bash
