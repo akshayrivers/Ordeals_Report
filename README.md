@@ -1,6 +1,6 @@
 # MS Yug mark check
 
-For Suresh Kumar, teacher, Govt. Middle School Yug, Zone Jib, Udhampur.
+For Suresh Kumar (My dad), teacher, Govt. Middle School Yug, Zone Jib, Udhampur.
 Register: class 8, session 2023-24, Sheet3 of the school result register.
 Built 22 November 2026. The page runs on this computer and does not upload marks.
 
