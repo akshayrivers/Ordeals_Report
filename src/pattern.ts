@@ -15,6 +15,10 @@ export type CustomWeights = {
   fa: number;
   activities: number;
   summative: number;
+  u1: number;
+  u2: number;
+  t1: number;
+  t2: number;
 };
 
 export type ResolvedPattern = {
@@ -48,7 +52,7 @@ const REGISTER_PARTS: WeightPart[] = [
   { key: "summative", label: "Summative", max: 50, weight: 50 },
 ];
 
-const U1_PARTS: WeightPart[] = [{ key: "u1", label: "U1", max: 100, weight: 100 }];
+const U1_PARTS: WeightPart[] = [{ key: "u1", label: "U1", max: 25, weight: 100 }];
 
 const TERM_PARTS: WeightPart[] = [
   { key: "u1", label: "U1", max: 25, weight: 25 },
@@ -66,18 +70,18 @@ export function weightSum(parts: WeightPart[]): number {
   return parts.reduce((total, part) => total + part.weight, 0);
 }
 
-function present(students: StudentResult[], key: "u1" | "u2" | "t1" | "t2"): boolean {
-  return students.some((student) => student.subjects.some((subject) => subject.extras[key] !== null));
+function columnPresent(students: StudentResult[], key: WeightKey): boolean {
+  return students.some((student) => student.subjects.some((subject) => partValue(subject, key) !== null));
 }
 
 function missingLabels(students: StudentResult[], parts: WeightPart[]): string[] {
-  const missing: string[] = [];
-  for (const part of parts) {
-    if (part.key === "u1" || part.key === "u2" || part.key === "t1" || part.key === "t2") {
-      if (!present(students, part.key)) missing.push(part.label);
-    }
-  }
-  return missing;
+  return parts.filter((part) => !columnPresent(students, part.key)).map((part) => part.label);
+}
+
+function absentNote(missing: string[], ready: string): string {
+  if (missing.length === 0) return ready;
+  const verb = missing.length === 1 ? "is" : "are";
+  return `${missing.join(", ")} ${verb} not in this file. No total was invented. The grade on the sheet is not recomputed.`;
 }
 
 export function resolvePattern(id: PatternId, custom: CustomWeights, students: StudentResult[]): ResolvedPattern {
@@ -103,9 +107,10 @@ export function resolvePattern(id: PatternId, custom: CustomWeights, students: S
       weightSum: weightSum(parts),
       usesRegisterGrade: false,
       missing,
-      note: missing.length
-        ? "U1 is not a column in this file. No U1 marks were invented. The grade on the sheet is not recomputed."
-        : "U1 weight is this control, not a scale written on the register. The grade on the sheet is not recomputed.",
+      note: absentNote(
+        missing,
+        "U1 is in this file, out of 25. Weight 100 is this control, not a scale written on the register. The grade on the sheet is not recomputed.",
+      ),
     };
   }
   if (id === "terms") {
@@ -118,36 +123,51 @@ export function resolvePattern(id: PatternId, custom: CustomWeights, students: S
       weightSum: weightSum(parts),
       usesRegisterGrade: false,
       missing,
-      note: missing.length
-        ? "U1, U2, T1, and T2 are not columns in this file. No marks were invented for them. Weights 25+25+25+25 are this control, not a scale from the register. The grade on the sheet is not recomputed."
-        : "These weights are this control, not a scale from the register. The grade on the sheet is not recomputed.",
+      note: absentNote(
+        missing,
+        "U1, U2, T1, and T2 are in this file, each out of 25. Weights 25+25+25+25 are this control, not a scale from the register. The grade on the sheet is not recomputed.",
+      ),
     };
   }
   if (id === "fa-sa") {
     const parts = FA_SA_PARTS;
+    const missing = missingLabels(students, parts);
     return {
       id,
       label: "FA / SA",
       parts,
       weightSum: weightSum(parts),
       usesRegisterGrade: false,
-      missing: [],
-      note: "FA uses the formative total already in the file. SA uses the summative already in the file. Weights 40 and 60 are this control, not written on the register. The grade on the sheet is not recomputed.",
+      missing,
+      note: absentNote(
+        missing,
+        "FA uses the formative total already in the file. SA uses the summative already in the file. Weights 40 and 60 are this control, not written on the register. The total is shown from those two columns. The grade on the sheet is not recomputed.",
+      ),
     };
   }
-  const parts: WeightPart[] = [
+  const catalog: WeightPart[] = [
     { key: "fa", label: "Formative (F1–F6)", max: 30, weight: custom.fa },
     { key: "activities", label: "Co-curricular", max: 20, weight: custom.activities },
     { key: "summative", label: "Summative", max: 50, weight: custom.summative },
+    { key: "u1", label: "U1", max: 25, weight: custom.u1 },
+    { key: "u2", label: "U2", max: 25, weight: custom.u2 },
+    { key: "t1", label: "T1", max: 25, weight: custom.t1 },
+    { key: "t2", label: "T2", max: 25, weight: custom.t2 },
   ];
+  const parts = catalog.filter((part) => columnPresent(students, part.key));
+  const absent = catalog.filter((part) => !columnPresent(students, part.key)).map((part) => part.label);
+  const ready =
+    absent.length === 0
+      ? "These weights apply to columns already in the file. The grade on the sheet is not recomputed."
+      : `The total uses only columns in this file. ${absent.join(", ")} ${absent.length === 1 ? "is" : "are"} left out. The grade on the sheet is not recomputed.`;
   return {
     id: "custom",
     label: "Custom weights",
     parts,
     weightSum: weightSum(parts),
     usesRegisterGrade: false,
-    missing: [],
-    note: "These weights apply to the formative total, co-curricular, and summative already in the file. The grade on the sheet is not recomputed.",
+    missing: parts.length === 0 ? absent : [],
+    note: parts.length === 0 ? absentNote(absent, ready) : ready,
   };
 }
 

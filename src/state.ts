@@ -84,7 +84,7 @@ export const state: {
     "Demo classes 1–8 are made up so the screens can be tried. They were not collected at the school. data.csv is not changed.",
   ],
   patternId: "register",
-  weights: { fa: 30, activities: 20, summative: 50 },
+  weights: { fa: 30, activities: 20, summative: 50, u1: 0, u2: 0, t1: 0, t2: 0 },
   layout: { ...SCHOOL_LAYOUT },
   exams: [],
   demoExams: loadDemoExams(demoExamsCsv),
@@ -121,9 +121,24 @@ export function visibleExams(): ExamRow[] {
   return [...state.parsedExams, ...state.exams];
 }
 
+const COMPONENT_KEYS = ["u1", "u2", "t1", "t2"] as const;
+
+function fillBlankComponents(rows: MarkRow[], file: MarkRow[]): MarkRow[] {
+  const byKey = new Map(file.map((row) => [`${row.student_id}\u0000${row.subject}`, row]));
+  return rows.map((row) => {
+    const source = byKey.get(`${row.student_id}\u0000${row.subject}`);
+    if (!source) return row;
+    const blank = COMPONENT_KEYS.every((key) => row[key].trim() === "");
+    const fileHas = COMPONENT_KEYS.some((key) => source[key].trim() !== "");
+    if (!blank || !fileHas) return row;
+    return { ...row, u1: source.u1, u2: source.u2, t1: source.t1, t2: source.t2 };
+  });
+}
+
 function applyMemory(id: DatasetId): void {
   const saved = memory[id];
-  const rows = (saved.rows ?? (id === "demo" ? demoFileRows : registerFileRows)).map(cloneRow);
+  const base = (saved.rows ?? (id === "demo" ? demoFileRows : registerFileRows)).map(cloneRow);
+  const rows = id === "demo" ? fillBlankComponents(base, demoFileRows) : base;
   state.dataset = id;
   state.rows = rows;
   state.extras = {

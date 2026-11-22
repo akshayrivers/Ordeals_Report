@@ -162,7 +162,11 @@ export function ingestCsv(text: string): IngestResult {
       ok: true,
       shape: "canonical-csv",
       rows: canonical.rows,
-      notes: ["Header is on row 1 and matches data.csv."],
+      notes: [
+        canonical.componentColumns.length
+          ? `Header is on row 1. Kept ${canonical.componentColumns.join(", ")}.`
+          : "Header is on row 1 and matches data.csv.",
+      ],
       refusedHeaders: [],
       headerRow: 1,
       sheetName: null,

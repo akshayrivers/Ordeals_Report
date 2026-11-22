@@ -6,6 +6,7 @@ import {
   scoreReport,
   type CustomWeights,
   type PatternId,
+  type ResolvedPattern,
   type ScoreLine,
 } from "../pattern";
 import { state, subscribe } from "../state";
@@ -23,8 +24,9 @@ export function mountMarks(root: HTMLElement): void {
     "Class check. On the register preset the total and the grade stay as written, and the rank is by that total. This page does not upload marks.",
   );
   const tabs = el("div");
+  const controls = el("div");
   const body = el("div", "view-body");
-  panel.append(el("h2", undefined, "Marks"), intro, tabs, body);
+  panel.append(el("h2", undefined, "Marks"), intro, tabs, controls, body);
   root.append(panel);
 
   function students(): StudentResult[] {
@@ -55,6 +57,7 @@ export function mountMarks(root: HTMLElement): void {
 
   function paint(): void {
     paintTabs();
+    controls.replaceChildren(patternBar(students()));
     body.replaceChildren();
     if (!state.report.ok) {
       const banner = el("p", "banner bad", state.report.error);
@@ -67,16 +70,8 @@ export function mountMarks(root: HTMLElement): void {
     else body.append(studentsView(list));
   }
 
-  function formatView(): HTMLElement {
+  function patternBar(group: StudentResult[]): HTMLElement {
     const block = el("div", "format-view");
-    block.append(
-      el("h3", undefined, "Exam format"),
-      el(
-        "p",
-        "quiet",
-        "This view is only the pattern. The student list is on Students. U1, U2, T1, and T2 are not invented when the file has no such column.",
-      ),
-    );
     const patternLabel = el("label", "file");
     patternLabel.append(el("span", undefined, "Preset"));
     const select = el("select");
@@ -94,18 +89,39 @@ export function mountMarks(root: HTMLElement): void {
     patternLabel.append(select);
     block.append(patternLabel);
 
+    const resolved = resolvePattern(state.patternId, state.weights, group);
     const custom = el("div", "weights");
     custom.hidden = state.patternId !== "custom";
-    custom.append(
-      weightInput("weight-fa", "Formative weight", "fa"),
-      weightInput("weight-activities", "Co-curricular weight", "activities"),
-      weightInput("weight-summative", "Summative weight", "summative"),
-    );
+    if (state.patternId === "custom") {
+      for (const part of resolved.parts) {
+        custom.append(weightInput(`weight-${part.key}`, `${part.label} weight`, part.key));
+      }
+    }
     block.append(custom);
-
-    const resolved = resolvePattern(state.patternId, state.weights, students());
     const weights = resolved.parts.map((part) => `${part.label}: weight ${part.weight}, max ${part.max}`).join(" · ");
-    block.append(el("p", "pattern-summary", `${weights}. Weights sum to ${resolved.weightSum}. ${resolved.note}`));
+    const summary = el(
+      "p",
+      "pattern-summary",
+      weights ? `${weights}. Weights sum to ${resolved.weightSum}. ${resolved.note}` : resolved.note,
+    );
+    summary.dataset.pattern = resolved.id;
+    block.append(summary);
+    if (state.patternId !== "register" && resolved.missing.length === 0) {
+      block.append(el("p", "quiet", "Rank is by this total inside the class. No pass mark is applied."));
+    }
+    return block;
+  }
+
+  function formatView(): HTMLElement {
+    const block = el("div", "format-view");
+    block.append(
+      el("h3", undefined, "Exam format"),
+      el(
+        "p",
+        "quiet",
+        "This view is only the pattern. The student list is on Students. A total is calculated when the columns are in the open file. U1, U2, T1, and T2 are not invented when the file has no such column.",
+      ),
+    );
     if (state.dataset === "demo") {
       block.append(
         el(
@@ -182,7 +198,9 @@ export function mountMarks(root: HTMLElement): void {
     wrap.append(banner);
     const scores = scoreReport(group, resolved);
     const stack = el("div", "students");
-    for (const student of group) stack.append(renderStudent(student, scores.find((line) => line.studentId === student.studentId)));
+    for (const student of group) {
+      stack.append(renderStudent(student, scores.find((line) => line.studentId === student.studentId), resolved));
+    }
     wrap.append(stack);
     return wrap;
   }
@@ -197,7 +215,7 @@ export function mountMarks(root: HTMLElement): void {
   paint();
 }
 
-function renderStudent(student: StudentResult, score: ScoreLine | undefined): HTMLElement {
+function renderStudent(student: StudentResult, score: ScoreLine | undefined, pattern: ResolvedPattern): HTMLElement {
   const card = el("article", student.reasons.length ? "student unsafe" : "student");
   card.dataset.student = student.studentId;
   const top = el("div", "top");
@@ -213,15 +231,20 @@ function renderStudent(student: StudentResult, score: ScoreLine | undefined): HT
     sheet,
     el("span", "counted", student.countedTotal === null ? "—" : `${student.countedTotal} / ${student.countedMax}`),
   );
-  if (score?.rank) scoreBox.append(el("span", "rank", `Rank ${score.rank}`));
-  if (state.patternId !== "register") {
-    scoreBox.append(
-      el(
-        "span",
-        "weighted",
-        score && score.total !== null ? `Weighted ${formatTotal(score.total)}` : "No weighted total",
-      ),
-    );
+  if (score?.rank && pattern.missing.length === 0) {
+    scoreBox.append(el("span", "rank", `Rank ${score.rank} by this total`));
+  }
+  if (!pattern.usesRegisterGrade) {
+    let text = "No total. A mark for this student is blank.";
+    let shown = "";
+    if (pattern.missing.length > 0) text = "No total. The columns are not in this file.";
+    else if (score && score.total !== null) {
+      text = `Total ${formatTotal(score.total)}`;
+      shown = String(score.total);
+    }
+    const weighted = el("span", "weighted", text);
+    weighted.dataset.total = shown;
+    scoreBox.append(weighted, el("span", "src", "Sheet grade, not recomputed"));
   }
   top.append(
     who,
@@ -235,10 +258,16 @@ function renderStudent(student: StudentResult, score: ScoreLine | undefined): HT
   const subjects = el("ul", "subjects");
   for (const subject of student.subjects) {
     const item = el("li", subject.unused ? "unused" : undefined);
+    const extra = pattern.parts.flatMap((part) => {
+      if (part.key !== "u1" && part.key !== "u2" && part.key !== "t1" && part.key !== "t2") return [];
+      const value = subject.extras[part.key];
+      return [`${part.label} ${value === null ? "—" : String(value)}`];
+    });
+    const detail = [subject.components || "no row", ...extra].join(" · ");
     item.append(
       el("span", "name", subject.cardName),
       el("b", undefined, subject.total === null ? "—" : String(subject.total)),
-      el("small", undefined, subject.components || "no row"),
+      el("small", undefined, detail),
     );
     subjects.append(item);
   }

@@ -316,20 +316,33 @@ function componentLine(row: MarkRow): string {
   return `F ${row.f1} ${row.f2} ${row.f3} ${row.f4} ${row.f5} ${row.f6} · activities ${row.co_curricular} · summative ${row.summative}`;
 }
 
-export function rowsFromCanonical(text: string): { ok: true; rows: MarkRow[] } | { ok: false; error: string } {
+export function rowsFromCanonical(
+  text: string,
+): { ok: true; rows: MarkRow[]; componentColumns: string[] } | { ok: false; error: string } {
   const table = parseCsvTable(text);
   if (table.length === 0) return { ok: false, error: "The file is empty." };
 
   const header = table[0].map((cell) => cell.trim());
-  if (header.join(",") !== EXPECTED_HEADER.join(",")) {
+  const expected = [...EXPECTED_HEADER];
+  const componentHeader = ["u1", "u2", "t1", "t2"];
+  const baseOk = expected.every((name, index) => header[index] === name);
+  const extra = header.slice(expected.length);
+  const extraOk =
+    extra.length === 0 ||
+    (extra.length === componentHeader.length && extra.every((name, index) => name === componentHeader[index]));
+  if (!baseOk || !extraOk) {
     return {
       ok: false,
-      error: `Header does not match data.csv. Expected ${EXPECTED_HEADER.join(",")}.`,
+      error: `Header does not match data.csv. Expected ${expected.join(",")} and, if present, u1,u2,t1,t2.`,
     };
   }
 
   const rows: MarkRow[] = table.slice(1).map((cells) => {
     const value = (index: number) => (cells[index] ?? "").trim();
+    const component = (name: string) => {
+      const index = header.indexOf(name);
+      return index >= 0 ? value(index) : "";
+    };
     return {
       student_id: value(0),
       className: value(1),
@@ -349,13 +362,13 @@ export function rowsFromCanonical(text: string): { ok: true; rows: MarkRow[] } |
       grade: value(15),
       remark: value(16),
       source: value(17),
-      u1: "",
-      u2: "",
-      t1: "",
-      t2: "",
+      u1: component("u1"),
+      u2: component("u2"),
+      t1: component("t1"),
+      t2: component("t2"),
     };
   });
-  return { ok: true, rows };
+  return { ok: true, rows, componentColumns: extra };
 }
 
 export function checkCsv(text: string): Report {
