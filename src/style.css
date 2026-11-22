@@ -55,14 +55,36 @@ body {
   align-items: center;
 }
 
+.text-button, .solid-button {
+  font: inherit;
+  cursor: pointer;
+}
+
 .text-button {
   border: 0;
   background: transparent;
   color: #6b4a2e;
   text-decoration: underline;
-  cursor: pointer;
-  font: inherit;
 }
+
+.solid-button {
+  border: 0;
+  background: #1c1915;
+  color: #f3efe6;
+  padding: 8px 12px;
+}
+
+.solid-button:disabled { opacity: 0.5; cursor: wait; }
+
+.preview {
+  width: 100%;
+  height: 720px;
+  margin: 8px 0 16px;
+  border: 1px solid #e4ddd0;
+  background: white;
+}
+
+.preview[hidden] { display: none; }
 
 .banner, .meta {
   margin: 0 0 12px;
@@ -139,6 +161,62 @@ body {
 
 .trust { margin-top: 22px; max-width: 42rem; }
 .trust h2 { font-size: 1.05rem; margin: 0 0 6px; }
+
+.panel {
+  margin: 18px 0;
+  padding: 12px 14px;
+  background: #fffdf8;
+  border: 1px solid #e4ddd0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.panel h2 {
+  margin: 0 0 6px;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.quiet, .pattern-summary, .notes, .exam-error {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+
+.quiet { margin: 0 0 10px; color: #4a453e; max-width: 46rem; }
+.pattern-summary { margin: 10px 0 0; max-width: 46rem; }
+.notes { margin: 0 0 12px; }
+.notes p { margin: 0 0 6px; }
+.notes[hidden] { display: none; }
+.exam-error { margin: 8px 0 0; color: #8a2e1b; }
+.exam-error:empty { display: none; }
+
+.check, .weights, .exam-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+}
+
+.check { margin: 4px 0; }
+.weights { margin-top: 10px; }
+.weights[hidden] { display: none; }
+
+select, .panel input[type="text"], .panel input[type="number"], .panel input[type="date"] {
+  font: inherit;
+  padding: 4px 6px;
+  border: 1px solid #cfc6b8;
+  background: white;
+}
+
+.rank, .weighted { font-variant-numeric: tabular-nums; }
+
+.exams {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.exams li { margin: 4px 0; }
+.exam-list .banner p { margin: 0 0 4px; }
+.exam-list .banner p:last-child { margin: 0; }
 
 @media (max-width: 800px) {
   body { padding: 16px 10px 48px; }

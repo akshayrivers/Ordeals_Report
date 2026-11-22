@@ -80,6 +80,22 @@ export type MarkRow = {
   grade: string;
   remark: string;
   source: string;
+  u1: string;
+  u2: string;
+  t1: string;
+  t2: string;
+};
+
+export type MarkParts = {
+  f1: number | null;
+  f2: number | null;
+  f3: number | null;
+  f4: number | null;
+  f5: number | null;
+  f6: number | null;
+  fa: number | null;
+  activities: number | null;
+  summative: number | null;
 };
 
 export type SubjectCell = {
@@ -89,6 +105,13 @@ export type SubjectCell = {
   unused: boolean;
   reasons: string[];
   components: string;
+  marks: MarkParts;
+  extras: {
+    u1: number | null;
+    u2: number | null;
+    t1: number | null;
+    t2: number | null;
+  };
 };
 
 export type StudentResult = {
@@ -98,6 +121,7 @@ export type StudentResult = {
   countedTotal: number | null;
   countedMax: number;
   source: string;
+  remark: string;
   subjects: SubjectCell[];
   reasons: string[];
 };
@@ -112,7 +136,7 @@ export type Report =
     }
   | { ok: false; error: string };
 
-function parseCsvTable(text: string): string[][] {
+export function parseCsvTable(text: string, keepEmpty = false): string[][] {
   const table: string[][] = [];
   let row: string[] = [];
   let field = "";
@@ -142,7 +166,7 @@ function parseCsvTable(text: string): string[][] {
     } else if (ch === "\n") {
       row.push(field);
       field = "";
-      if (row.some((cell) => cell !== "")) table.push(row);
+      if (keepEmpty || row.some((cell) => cell !== "")) table.push(row);
       row = [];
     } else {
       field += ch;
@@ -150,7 +174,10 @@ function parseCsvTable(text: string): string[][] {
   }
   if (field !== "" || row.length > 0) {
     row.push(field);
-    if (row.some((cell) => cell !== "")) table.push(row);
+    if (keepEmpty || row.some((cell) => cell !== "")) table.push(row);
+  }
+  if (keepEmpty) {
+    while (table.length > 0 && table[table.length - 1].every((cell) => cell === "")) table.pop();
   }
   return table;
 }
@@ -219,11 +246,76 @@ function isZeroBlock(row: MarkRow): boolean {
   return MARK_FIELDS.every((field) => parseMark(row[field]) === 0);
 }
 
+function optionalMark(raw: string | undefined): number | null {
+  if (raw === undefined || raw.trim() === "") return null;
+  return parseMark(raw);
+}
+
+function extrasOf(row: MarkRow | undefined): SubjectCell["extras"] {
+  return {
+    u1: optionalMark(row?.u1),
+    u2: optionalMark(row?.u2),
+    t1: optionalMark(row?.t1),
+    t2: optionalMark(row?.t2),
+  };
+}
+
+function sameMarks(a: MarkRow, b: MarkRow): boolean {
+  const fields = [...MARK_FIELDS, "grand_total", "grade", "u1", "u2", "t1", "t2"] as const;
+  return fields.every((field) => a[field] === b[field]);
+}
+
+function duplicateReasons(list: MarkRow[]): string[] {
+  const reasons: string[] = [];
+  const seen = new Map<string, MarkRow>();
+  for (const row of list) {
+    const prev = seen.get(row.subject);
+    if (!prev) {
+      seen.set(row.subject, row);
+      continue;
+    }
+    const label = CARD_NAME[row.subject] ?? row.subject;
+    reasons.push(
+      sameMarks(prev, row)
+        ? `${label}: duplicate row, not merged`
+        : `${label}: two rows disagree, not merged`,
+    );
+  }
+  return reasons;
+}
+
+function marksOf(row: MarkRow | undefined): MarkParts {
+  if (!row) {
+    return {
+      f1: null,
+      f2: null,
+      f3: null,
+      f4: null,
+      f5: null,
+      f6: null,
+      fa: null,
+      activities: null,
+      summative: null,
+    };
+  }
+  return {
+    f1: parseMark(row.f1),
+    f2: parseMark(row.f2),
+    f3: parseMark(row.f3),
+    f4: parseMark(row.f4),
+    f5: parseMark(row.f5),
+    f6: parseMark(row.f6),
+    fa: parseMark(row.fa_total),
+    activities: parseMark(row.co_curricular),
+    summative: parseMark(row.summative),
+  };
+}
+
 function componentLine(row: MarkRow): string {
   return `F ${row.f1} ${row.f2} ${row.f3} ${row.f4} ${row.f5} ${row.f6} · activities ${row.co_curricular} · summative ${row.summative}`;
 }
 
-export function checkCsv(text: string): Report {
+export function rowsFromCanonical(text: string): { ok: true; rows: MarkRow[] } | { ok: false; error: string } {
   const table = parseCsvTable(text);
   if (table.length === 0) return { ok: false, error: "The file is empty." };
 
@@ -235,15 +327,7 @@ export function checkCsv(text: string): Report {
     };
   }
 
-  const body = table.slice(1);
-  if (body.length !== EXPECTED_ROWS) {
-    return {
-      ok: false,
-      error: `Expected ${EXPECTED_ROWS} data rows, found ${body.length}.`,
-    };
-  }
-
-  const rows: MarkRow[] = body.map((cells) => {
+  const rows: MarkRow[] = table.slice(1).map((cells) => {
     const value = (index: number) => (cells[index] ?? "").trim();
     return {
       student_id: value(0),
@@ -264,9 +348,28 @@ export function checkCsv(text: string): Report {
       grade: value(15),
       remark: value(16),
       source: value(17),
+      u1: "",
+      u2: "",
+      t1: "",
+      t2: "",
     };
   });
+  return { ok: true, rows };
+}
 
+export function checkCsv(text: string): Report {
+  const parsed = rowsFromCanonical(text);
+  if (!parsed.ok) return parsed;
+  if (parsed.rows.length !== EXPECTED_ROWS) {
+    return {
+      ok: false,
+      error: `Expected ${EXPECTED_ROWS} data rows, found ${parsed.rows.length}.`,
+    };
+  }
+  return checkRows(parsed.rows);
+}
+
+export function checkRows(rows: MarkRow[]): Report {
   const bySubject = new Map<string, MarkRow[]>();
   for (const row of rows) {
     const list = bySubject.get(row.subject) ?? [];
@@ -287,13 +390,16 @@ export function checkCsv(text: string): Report {
   }
 
   const students: StudentResult[] = [...byStudent.entries()].map(([studentId, list]) => {
-    const reasons = list.flatMap(rowReasons);
+    const reasons = [...list.flatMap(rowReasons), ...duplicateReasons(list)];
     const grades = [...new Set(list.map((row) => row.grade))];
     if (grades.length !== 1) reasons.push("grade is not the same on every subject row");
     const grands = [...new Set(list.map((row) => row.grand_total))];
     if (grands.length !== 1) reasons.push("grand total is not the same on every subject row");
 
-    const byName = new Map(list.map((row) => [row.subject, row]));
+    const byName = new Map<string, MarkRow>();
+    for (const row of list) {
+      if (!byName.has(row.subject)) byName.set(row.subject, row);
+    }
     const subjects: SubjectCell[] = CARD_ORDER.map((registerName) => {
       const row = byName.get(registerName);
       const cardName = CARD_NAME[registerName] ?? registerName;
@@ -305,6 +411,8 @@ export function checkCsv(text: string): Report {
           unused: unused.has(registerName),
           reasons: [`${cardName}: missing row`],
           components: "",
+          marks: marksOf(undefined),
+          extras: extrasOf(undefined),
         };
       }
       return {
@@ -314,6 +422,8 @@ export function checkCsv(text: string): Report {
         unused: unused.has(registerName),
         reasons: rowReasons(row),
         components: componentLine(row),
+        marks: marksOf(row),
+        extras: extrasOf(row),
       };
     });
     for (const subject of subjects) {
@@ -345,6 +455,7 @@ export function checkCsv(text: string): Report {
       countedTotal,
       countedMax,
       source: list[0]?.source ?? "",
+      remark: new Set(list.map((row) => row.remark)).size === 1 ? (list[0]?.remark ?? "") : "",
       subjects,
       reasons,
     };

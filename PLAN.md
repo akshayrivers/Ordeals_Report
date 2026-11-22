@@ -6,13 +6,16 @@ Stack: TypeScript and Vite. The app runs locally. It does not upload marks. Libr
 
 ## What we are building
 
-You chose all three jobs. They ship in this order, each one running before the next starts.
+Four jobs, on one local page. The page does not upload marks.
 
-1. **Mark check.** Read `data.csv` from Sheet3. Flag a row that breaks the maxima or the stored totals. Report the unused language subject that is stored as zero. Show each student's subject totals, grand total, and the grade already written on the sheet.
-2. **Exam clashes.** No date or room sheet is in `local/` yet. This starts when that sheet is added. Dates are not invented.
-3. **Report card PDF.** Match the blank card in `local/`. Same fields, same subject order as that card. Dragging and resizing boxes waits until a PDF of that layout already opens.
+1. **Ingest a messy sheet.** `data.csv` is still enough to open the page. Dropping a `.csv` or `.xlsx` is an extra path. The header does not have to be on row 1. A Sheet3-style file (titles on rows 1–5, marks from row 6, merged subject groups) is recognised. A duplicate row, or two rows for the same student and subject that disagree, is flagged and not merged. Accepted rows are stored in SQLite in the browser (`sql.js`). There is no server. If the cluster workbook is dropped, Sheet1 and Sheet2 are not stored. Aadhaar, phone, parent names, address, date of birth, category, and roll are not written into the database.
+2. **Exam clashes.** There is still no date or room sheet in `local/`. The page does not ship a timetable or a holiday calendar. The user adds a class, subject, date, and room. A blank date is the day the row is added, and it is labeled as generated, not as a date from the school. Two exams in the same room on the same date are flagged. The same class in two rooms at the same time is flagged.
+3. **Exam pattern.** The preset that matches this register is F1–F6 out of 5 (max 30), co-curricular out of 20, and summative out of 50. On that preset the total is the grand total on the sheet, the grade is the grade on the sheet, and the rank is by that total. The page also offers U1 only, U1/U2/T1/T2, FA/SA, and custom weights, and it shows the sum of the weights. FA/SA and custom weights use marks already in the file. U1, U2, T1, and T2 are not columns in this file, so those presets do not invent marks or a total. No preset invents a pass mark or a new grade scale. When the preset is not the register pattern, the page says the grade on the sheet is not recomputed.
+4. **Report card PDF.** One page per student, in the school layout. The father's line uses a stable placeholder from `placeholders/fathers.csv`. Those labels are not names from the school. The year stays 2023-24, the register session. The print date is the day the PDF is made, and it is labeled as generated. A layout panel shows or hides the father's name, the F1–F6 columns, and the unused-subject note. Dragging boxes is not part of this page. The default is the school card with those sections shown.
 
-Accounts, cloud sync, attendance, and a school ERP stay out. SQLite is added only if the mark check needs it to finish. The page runs on the machine in front of us and does not upload marks.
+The mark check still reads `data.csv`, flags a row that breaks the maxima or the stored totals, reports the unused language subject stored as zero, and shows each student's subject totals, grand total, and the grade already written on the sheet.
+
+Accounts, cloud sync, attendance, and a school ERP stay out.
 
 ## What is actually in `local/`
 
@@ -26,7 +29,7 @@ Checked 22 November 2026. Nothing in this section is copied from a student row.
 
 Sheet3 and the eight Yug rows on Sheet1 hold the same marks. The public file is built only from Sheet3. Sheet1 and Sheet2 stay in `local/` and are never written out. They contain Aadhaar numbers, phone numbers, parent names, addresses, and dates of birth.
 
-There is no exam-date or room sheet in `local/`. The clash check waits until that sheet exists. Dates are not invented.
+There is no exam-date or room sheet in `local/`. The page does not invent a holiday calendar or a filled timetable. A missing print date, or an exam row with no date, uses the day the PDF or the row is generated, and the page says so.
 
 ## How Sheet3 is laid out
 
@@ -81,7 +84,7 @@ student_id,class,session,subject,f1,f2,f3,f4,f5,f6,fa_total,co_curricular,summat
 
 `class` is `8`. `session` is `2023-24`, taken from the register title. `source` is `sheet3` plus the Excel row, so `sheet3:6` for Student_01. The blank card says 2024-25. The CSV keeps 2023-24 and does not rewrite the card's printed year.
 
-`data.csv` is the file the app reads. The xlsx is not an input at runtime.
+`data.csv` is enough for the app to run. A dropped xlsx or csv is optional. Identity columns from that drop are not stored. The xlsx in `local/` is not required at runtime.
 
 ## How the app reads `data.csv`
 
@@ -90,8 +93,8 @@ student_id,class,session,subject,f1,f2,f3,f4,f5,f6,fa_total,co_curricular,summat
 3. Group by `student_id`. The student's grand total on the sheet must equal the sum of that student's six `subject_total` values. Flag the student when it does not.
 4. A subject that is 0 on every row is reported as unused. It stays in the file and on the card as 0. It is left out of the "out of" figure when a percentage is shown, so eight unused papers are not treated as eight failed papers. The grade printed is the grade cell from the sheet. The app does not invent a new grade scale or a pass mark the sheet does not contain.
 5. The first screen is this list: student, the six subject totals, grand total, grade, and any unsafe reason. That is the mark-check output.
-6. The PDF step uses the same rows and the name map in the table above. It copies the blank card's layout: name line, father's name left blank (we do not have it in `data.csv`), class, roll line shows the student id, the six subjects, F1–F6, curricular activities, summative, total, grand total, the sheet grade, empty result line unless a remark exists. Incharge and Headmaster stay as labels with no signature.
-7. Clash checking is not part of this file. It starts only after a real date and room sheet is in `local/`.
+6. The PDF step uses the same rows and the name map in the table above. It copies the blank card's layout: name line left blank, father's name filled from `placeholders/fathers.csv` (a stand-in, not a name from the sheet), class, roll line shows the student id, the six subjects, F1–F6, curricular activities, summative, total, grand total, the sheet grade, empty result line unless a remark exists. The year is the register session, 2023-24. The print date is the day the PDF is generated and is labeled that way. Incharge and Headmaster stay as labels with no signature. The layout panel can hide the father's name, the F1–F6 columns, or the unused-subject note.
+7. Clash checking is not read from this file. The schedule starts empty. Dates the user leaves blank are the generation date, labeled as such.
 
 WhatsApp images go in `evidence/` after phone numbers and student names are cropped. They support the visit. They are not the two sources in `research.md`.
 
@@ -123,6 +126,7 @@ PLAN.md
 AGENTS.md
 fieldwork.md          # I write the visit
 data.csv              # I paste real rows
+placeholders/fathers.csv  # stand-in father labels, not from the school
 photos/               # two timestamped photos, no student names visible
 src/                  # Vite + TypeScript
 README.md             # how to run, real output, what it gets wrong
@@ -130,7 +134,7 @@ reflection.md         # I write this
 ai-chats/             # exports of the chats used
 ```
 
-The columns are fixed from Sheet3. They are listed under "How `data.csv` is produced". The weight on this register is already a sum: six formatives out of 5, co-curricular out of 20, summative out of 50. There is no separate U1/U2 weight on this file.
+The columns are fixed from Sheet3. They are listed under "How `data.csv` is produced". The weight on this register is already a sum: six formatives out of 5, co-curricular out of 20, summative out of 50. There is no separate U1/U2 weight on this file. The U1, U1/U2/T1/T2, FA/SA, and custom controls are presets on the page. Only FA/SA and custom weights are computed from marks this file already has. They are not a second scale copied from the school.
 
 The README must say the tool should not be trusted to invent a missing mark, to decide grace the school has not written down, or to replace his look at the printed card.
 
