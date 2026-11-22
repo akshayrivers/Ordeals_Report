@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Open the local address Vite prints. The first screen is the mark check for `data.csv`. That screen does not need a dropped file or the browser database.
+Open the local address Vite prints. Home only links to the four jobs: `#/import`, `#/marks`, `#/schedule`, and `#/cards`. Marks reads `data.csv` and does not need a dropped file or the browser database.
 
 To rebuild `data.csv` after the workbook in `local/` changes:
 
@@ -46,13 +46,13 @@ Dogri/Additional is 0 for all eight students, so the counted total is out of 500
 
 ## Controls
 
-**Drop a CSV or xlsx** reads the file in the browser and stores the mark rows in SQLite on this computer (`sql.js`). Nothing is uploaded. `data.csv` still works if you never drop a file. A header that is not on row 1 is reported. A Sheet3-style sheet (titles on rows 1–5, F1 labels on row 5, marks from row 6, merged subject groups) is turned into the same kind of rows as `data.csv`, with `Student_01` in sheet order. Duplicate rows are not merged. If the cluster workbook is dropped, Sheet1 and Sheet2 are skipped, and Aadhaar, phone, parent names, address, date of birth, category, and roll are not stored. **Back to data.csv** shows the committed file again and clears stored marks from the browser database.
+**Import** (`#/import`). Drop a CSV or xlsx. The file is read in the browser and the mark rows are stored in SQLite on this computer (`sql.js`). Nothing is uploaded. `data.csv` still works if you never drop a file. A header that is not on row 1 is reported. A Sheet3-style sheet (titles on rows 1–5, F1 labels on row 5, marks from row 6, merged subject groups) is turned into the same kind of rows as `data.csv`, with `Student_01` in sheet order. Duplicate rows are not merged. If the cluster workbook is dropped, Sheet1 and Sheet2 are skipped, and Aadhaar, phone, parent names, address, date of birth, category, and roll are not stored. **Back to data.csv** shows the committed file again and clears stored marks from the browser database.
 
-**Exam pattern.** Register is F1–F6 (max 30) + co-curricular (max 20) + summative (max 50). The total and the grade are the ones on the sheet, and the rank is by that total. FA/SA uses the formative total and the summative already in the file, with weights 40 and 60 that belong to this control, not to the register. Custom weights do the same for formative, co-curricular, and summative, and the page shows what they sum to. U1 only, and U1/U2/T1/T2, are listed because those cycles were described. This file has no such columns, so those presets do not invent a total. Any preset other than the register says the grade on the sheet is not recomputed. There is no pass mark on this page.
+**Marks** (`#/marks`). Register is F1–F6 (max 30) + co-curricular (max 20) + summative (max 50). The total and the grade are the ones on the sheet, and the rank is by that total. FA/SA uses the formative total and the summative already in the file, with weights 40 and 60 that belong to this control, not to the register. Custom weights do the same for formative, co-curricular, and summative, and the page shows what they sum to. U1 only, and U1/U2/T1/T2, are listed because those cycles were described. This file has no such columns, so those presets do not invent a total. Any preset other than the register says the grade on the sheet is not recomputed. There is no pass mark on this page.
 
-**Exam schedule.** The list starts empty. There is no school timetable in the folder. Add a class, subject, date, and room. Leave the date blank and the row uses today's date, marked assumed. Two exams in one room on one date are flagged. The same class in two rooms on one date is flagged.
+**Schedule** (`#/schedule`). The list starts empty. There is no school timetable in the folder. Add a class, subject, date, and room. Leave the date blank and the row uses today's date, marked assumed. Two exams in one room on one date are flagged. The same class in two rooms on one date is flagged.
 
-**Card layout.** Show or hide the father's placeholder, the F1–F6 columns, and the unused-subject note. All three start on, which is this page's school card. Hiding a section does not change the marks.
+**Cards** (`#/cards`). Show or hide the father's placeholder, the F1–F6 columns, and the unused-subject note. All three start on, which is the school card. Hiding a section does not change the marks. The year printed on the card stays 2023-24.
 
 ## What it gets wrong
 
@@ -66,4 +66,4 @@ There is no exam-date sheet here. A clash is only between rows typed on this pag
 
 ## Feed it a bad row
 
-Use "Feed another CSV" and change one mark, or edit `data.csv` and refresh. A formative mark above 5, a total that does not match its parts, or a row count other than 48 is reported instead of being quietly fixed. The limit for one F cell is `LIMITS.formative` in `src/check.ts`.
+Drop a changed CSV on Import, or edit `data.csv` and refresh. A formative mark above 5, a total that does not match its parts, or a row count other than 48 is reported instead of being quietly fixed. The limit for one F cell is `LIMITS.formative` in `src/check.ts`.

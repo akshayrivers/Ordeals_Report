@@ -6,7 +6,7 @@ Stack: TypeScript and Vite. The app runs locally. It does not upload marks. Libr
 
 ## What we are building
 
-Four jobs, on one local page. The page does not upload marks.
+Four jobs, each on its own page. Home only links to them. The pages do not upload marks.
 
 1. **Ingest a messy sheet.** `data.csv` is still enough to open the page. Dropping a `.csv` or `.xlsx` is an extra path. The header does not have to be on row 1. A Sheet3-style file (titles on rows 1–5, marks from row 6, merged subject groups) is recognised. A duplicate row, or two rows for the same student and subject that disagree, is flagged and not merged. Accepted rows are stored in SQLite in the browser (`sql.js`). There is no server. If the cluster workbook is dropped, Sheet1 and Sheet2 are not stored. Aadhaar, phone, parent names, address, date of birth, category, and roll are not written into the database.
 2. **Exam clashes.** There is still no date or room sheet in `local/`. The page does not ship a timetable or a holiday calendar. The user adds a class, subject, date, and room. A blank date is the day the row is added, and it is labeled as generated, not as a date from the school. Two exams in the same room on the same date are flagged. The same class in two rooms at the same time is flagged.
@@ -92,7 +92,7 @@ student_id,class,session,subject,f1,f2,f3,f4,f5,f6,fa_total,co_curricular,summat
 2. On each row, mark it unsafe when any of these is true: `student_id` is blank, a mark cell is blank, an F cell is outside 0–5, co-curricular is outside 0–20, summative is outside 0–50, `fa_total` is not the sum of F1–F6, or `subject_total` is not formative + co-curricular + summative.
 3. Group by `student_id`. The student's grand total on the sheet must equal the sum of that student's six `subject_total` values. Flag the student when it does not.
 4. A subject that is 0 on every row is reported as unused. It stays in the file and on the card as 0. It is left out of the "out of" figure when a percentage is shown, so eight unused papers are not treated as eight failed papers. The grade printed is the grade cell from the sheet. The app does not invent a new grade scale or a pass mark the sheet does not contain.
-5. The first screen is this list: student, the six subject totals, grand total, grade, and any unsafe reason. That is the mark-check output.
+5. The marks page is this list: student, the six subject totals, grand total, grade, and any unsafe reason. That is the mark-check output. Home only links to Import, Marks, Schedule, and Cards.
 6. The PDF step uses the same rows and the name map in the table above. It copies the blank card's layout: name line left blank, father's name filled from `placeholders/fathers.csv` (a stand-in, not a name from the sheet), class, roll line shows the student id, the six subjects, F1–F6, curricular activities, summative, total, grand total, the sheet grade, empty result line unless a remark exists. The year is the register session, 2023-24. The print date is the day the PDF is generated and is labeled that way. Incharge and Headmaster stay as labels with no signature. The layout panel can hide the father's name, the F1–F6 columns, or the unused-subject note.
 7. Clash checking is not read from this file. The schedule starts empty. Dates the user leaves blank are the generation date, labeled as such.
 
