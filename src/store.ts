@@ -1,7 +1,16 @@
 import initSqlJs, { type Database, type SqlValue } from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
 import type { MarkRow } from "./check";
-import { prepareExam, type ExamDraft, type ExamRow } from "./schedule";
+import { prepareExam, type ExamDraft, type ExamOrigin, type ExamRow } from "./schedule";
+
+export type ExtraColumn = { key: string; label: string };
+export type ExtraValues = Record<string, Record<string, string>>;
+
+export type WorkingCopy = {
+  rows: MarkRow[] | null;
+  columns: ExtraColumn[];
+  values: ExtraValues;
+};
 
 export type MarkStore = {
   persistent: boolean;
@@ -10,6 +19,9 @@ export type MarkStore = {
   readExams(): Promise<ExamRow[]>;
   addExam(draft: ExamDraft): Promise<ExamRow[]>;
   clearExams(): Promise<void>;
+  readWorking(dataset: string): Promise<WorkingCopy | null>;
+  saveWorking(dataset: string, copy: WorkingCopy): Promise<void>;
+  clearWorking(dataset: string): Promise<void>;
 };
 
 const DB_NAME = "ms-yug-local";
@@ -97,9 +109,55 @@ function migrate(db: Database): void {
       subject TEXT,
       exam_date TEXT,
       date_assumed INTEGER,
-      room TEXT
+      room TEXT,
+      origin TEXT
+    );
+    CREATE TABLE IF NOT EXISTS working_marks (
+      dataset TEXT,
+      id INTEGER,
+      student_id TEXT,
+      class_name TEXT,
+      session TEXT,
+      subject TEXT,
+      f1 TEXT, f2 TEXT, f3 TEXT, f4 TEXT, f5 TEXT, f6 TEXT,
+      fa_total TEXT,
+      co_curricular TEXT,
+      summative TEXT,
+      subject_total TEXT,
+      grand_total TEXT,
+      grade TEXT,
+      remark TEXT,
+      source TEXT,
+      u1 TEXT, u2 TEXT, t1 TEXT, t2 TEXT,
+      PRIMARY KEY (dataset, id)
+    );
+    CREATE TABLE IF NOT EXISTS extra_columns (
+      dataset TEXT,
+      key TEXT,
+      label TEXT,
+      PRIMARY KEY (dataset, key)
+    );
+    CREATE TABLE IF NOT EXISTS extra_cells (
+      dataset TEXT,
+      row_key TEXT,
+      key TEXT,
+      value TEXT,
+      PRIMARY KEY (dataset, row_key, key)
     );
   `);
+  ensureColumn(db, "exams", "origin", "TEXT");
+}
+
+function columnNames(db: Database, table: string): string[] {
+  const info = db.exec(`PRAGMA table_info(${table})`);
+  const cols = info[0];
+  if (!cols) return [];
+  const nameIndex = cols.columns.indexOf("name");
+  return cols.values.map((row) => String(row[nameIndex]));
+}
+
+function ensureColumn(db: Database, table: string, name: string, decl: string): void {
+  if (!columnNames(db, table).includes(name)) db.run(`ALTER TABLE ${table} ADD COLUMN ${name} ${decl}`);
 }
 
 function readMarks(db: Database): MarkRow[] {
@@ -151,11 +209,13 @@ function readNotes(db: Database): string[] {
 
 function readExamRows(db: Database): ExamRow[] {
   const statement = db.prepare(
-    "SELECT id, class_name, subject, exam_date, date_assumed, room FROM exams ORDER BY id",
+    "SELECT id, class_name, subject, exam_date, date_assumed, room, origin FROM exams ORDER BY id",
   );
   const rows: ExamRow[] = [];
   while (statement.step()) {
     const row = statement.getAsObject();
+    const originText = text(row.origin);
+    const origin: ExamOrigin = originText === "dummy" || originText === "parsed" ? originText : "entered";
     rows.push({
       id: Number(row.id),
       className: text(row.class_name),
@@ -163,6 +223,7 @@ function readExamRows(db: Database): ExamRow[] {
       date: text(row.exam_date),
       dateAssumed: Number(row.date_assumed) === 1,
       room: text(row.room),
+      origin,
     });
   }
   statement.free();
@@ -264,14 +325,10 @@ export async function openStore(): Promise<MarkStore> {
       const existing = readExamRows(db);
       const nextId = existing.reduce((max, row) => Math.max(max, row.id), 0) + 1;
       const exam = prepareExam(draft, nextId);
-      db.run("INSERT INTO exams (id, class_name, subject, exam_date, date_assumed, room) VALUES (?, ?, ?, ?, ?, ?)", [
-        exam.id,
-        exam.className,
-        exam.subject,
-        exam.date,
-        exam.dateAssumed ? 1 : 0,
-        exam.room,
-      ]);
+      db.run(
+        "INSERT INTO exams (id, class_name, subject, exam_date, date_assumed, room, origin) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [exam.id, exam.className, exam.subject, exam.date, exam.dateAssumed ? 1 : 0, exam.room, exam.origin],
+      );
       await persist();
       return readExamRows(db);
     },
@@ -279,5 +336,144 @@ export async function openStore(): Promise<MarkStore> {
       db.run("DELETE FROM exams");
       await persist();
     },
+    async readWorking(dataset) {
+      const rows = readWorkingMarks(db, dataset);
+      const columns = readExtraColumns(db, dataset);
+      const values = readExtraValues(db, dataset);
+      if (rows.length === 0 && columns.length === 0 && Object.keys(values).length === 0) return null;
+      return { rows: rows.length ? rows : null, columns, values };
+    },
+    async saveWorking(dataset, copy) {
+      db.exec("BEGIN");
+      try {
+        db.run("DELETE FROM working_marks WHERE dataset = ?", [dataset]);
+        db.run("DELETE FROM extra_columns WHERE dataset = ?", [dataset]);
+        db.run("DELETE FROM extra_cells WHERE dataset = ?", [dataset]);
+        if (copy.rows) {
+          const insert = db.prepare(
+            `INSERT INTO working_marks (
+              dataset, id, student_id, class_name, session, subject, f1, f2, f3, f4, f5, f6,
+              fa_total, co_curricular, summative, subject_total, grand_total, grade, remark, source,
+              u1, u2, t1, t2
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          );
+          copy.rows.forEach((row, index) => {
+            insert.run([
+              dataset,
+              index + 1,
+              row.student_id,
+              row.className,
+              row.session,
+              row.subject,
+              row.f1,
+              row.f2,
+              row.f3,
+              row.f4,
+              row.f5,
+              row.f6,
+              row.fa_total,
+              row.co_curricular,
+              row.summative,
+              row.subject_total,
+              row.grand_total,
+              row.grade,
+              row.remark,
+              row.source,
+              row.u1,
+              row.u2,
+              row.t1,
+              row.t2,
+            ]);
+          });
+          insert.free();
+        }
+        const columnInsert = db.prepare("INSERT INTO extra_columns (dataset, key, label) VALUES (?, ?, ?)");
+        for (const column of copy.columns) columnInsert.run([dataset, column.key, column.label]);
+        columnInsert.free();
+        const cellInsert = db.prepare("INSERT INTO extra_cells (dataset, row_key, key, value) VALUES (?, ?, ?, ?)");
+        for (const [rowKey, fields] of Object.entries(copy.values)) {
+          for (const [key, value] of Object.entries(fields)) cellInsert.run([dataset, rowKey, key, value]);
+        }
+        cellInsert.free();
+        db.exec("COMMIT");
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+      await persist();
+    },
+    async clearWorking(dataset) {
+      db.run("DELETE FROM working_marks WHERE dataset = ?", [dataset]);
+      db.run("DELETE FROM extra_columns WHERE dataset = ?", [dataset]);
+      db.run("DELETE FROM extra_cells WHERE dataset = ?", [dataset]);
+      await persist();
+    },
   };
+}
+
+function readWorkingMarks(db: Database, dataset: string): MarkRow[] {
+  const statement = db.prepare(
+    `SELECT student_id, class_name, session, subject, f1, f2, f3, f4, f5, f6,
+            fa_total, co_curricular, summative, subject_total, grand_total, grade, remark, source,
+            u1, u2, t1, t2
+     FROM working_marks WHERE dataset = ? ORDER BY id`,
+  );
+  statement.bind([dataset]);
+  const rows: MarkRow[] = [];
+  while (statement.step()) {
+    const row = statement.getAsObject();
+    rows.push({
+      student_id: text(row.student_id),
+      className: text(row.class_name),
+      session: text(row.session),
+      subject: text(row.subject),
+      f1: text(row.f1),
+      f2: text(row.f2),
+      f3: text(row.f3),
+      f4: text(row.f4),
+      f5: text(row.f5),
+      f6: text(row.f6),
+      fa_total: text(row.fa_total),
+      co_curricular: text(row.co_curricular),
+      summative: text(row.summative),
+      subject_total: text(row.subject_total),
+      grand_total: text(row.grand_total),
+      grade: text(row.grade),
+      remark: text(row.remark),
+      source: text(row.source),
+      u1: text(row.u1),
+      u2: text(row.u2),
+      t1: text(row.t1),
+      t2: text(row.t2),
+    });
+  }
+  statement.free();
+  return rows;
+}
+
+function readExtraColumns(db: Database, dataset: string): ExtraColumn[] {
+  const statement = db.prepare("SELECT key, label FROM extra_columns WHERE dataset = ? ORDER BY key");
+  statement.bind([dataset]);
+  const columns: ExtraColumn[] = [];
+  while (statement.step()) {
+    const row = statement.getAsObject();
+    columns.push({ key: text(row.key), label: text(row.label) });
+  }
+  statement.free();
+  return columns;
+}
+
+function readExtraValues(db: Database, dataset: string): ExtraValues {
+  const statement = db.prepare("SELECT row_key, key, value FROM extra_cells WHERE dataset = ?");
+  statement.bind([dataset]);
+  const values: ExtraValues = {};
+  while (statement.step()) {
+    const row = statement.getAsObject();
+    const rowKey = text(row.row_key);
+    const fields = values[rowKey] ?? {};
+    fields[text(row.key)] = text(row.value);
+    values[rowKey] = fields;
+  }
+  statement.free();
+  return values;
 }

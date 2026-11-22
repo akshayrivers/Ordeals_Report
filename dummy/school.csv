@@ -1,0 +1,337 @@
+student_id,class,session,subject,f1,f2,f3,f4,f5,f6,fa_total,co_curricular,summative,subject_total,grand_total,grade,remark,source
+Student_1_01,1,demo,English,5,5,5,5,5,5,30,14,37,81,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_01,1,demo,Urdu/Hindi,3,3,3,3,3,3,18,14,38,70,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_01,1,demo,Mathematics,4,4,4,4,4,4,24,14,39,77,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_01,1,demo,Science,5,5,5,5,5,5,30,14,40,84,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_01,1,demo,Social Science,3,3,3,3,3,3,18,14,41,73,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_01,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,385,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,English,3,3,3,3,3,3,18,15,38,71,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,Urdu/Hindi,4,4,4,4,4,4,24,15,39,78,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,Mathematics,5,5,5,5,5,5,30,15,40,85,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,Science,3,3,3,3,3,3,18,15,41,74,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,Social Science,4,4,4,4,4,4,24,15,42,81,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_02,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,English,4,4,4,4,4,4,24,16,39,79,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,Urdu/Hindi,5,5,5,5,5,5,30,16,40,86,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,Mathematics,3,3,3,3,3,3,18,16,41,75,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,Science,4,4,4,4,4,4,24,16,42,82,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,Social Science,5,5,5,5,5,5,30,16,43,89,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_03,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,English,5,5,5,5,5,5,30,12,40,82,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,Urdu/Hindi,3,3,3,3,3,3,18,12,41,71,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,Mathematics,4,4,4,4,4,4,24,12,42,78,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,Science,5,5,5,5,5,5,30,12,43,85,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,Social Science,3,3,3,3,3,3,18,12,44,74,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_04,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,English,3,3,3,3,3,3,18,13,41,72,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,Urdu/Hindi,4,4,4,4,4,4,24,13,42,79,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,Mathematics,5,5,5,5,5,5,30,13,43,86,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,Science,3,3,3,3,3,3,18,13,44,75,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,Social Science,4,4,4,4,4,4,24,13,45,82,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_05,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,English,4,4,4,4,4,4,24,14,42,80,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,Science,4,4,4,4,4,4,24,14,45,83,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,Social Science,5,5,5,5,5,5,30,14,35,79,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_06,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,English,5,5,5,5,5,5,30,15,43,88,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,Science,5,5,5,5,5,5,30,15,35,80,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,Social Science,3,3,3,3,3,3,18,15,36,69,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_1_07,1,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,English,3,3,3,3,3,3,18,15,38,71,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,Urdu/Hindi,4,4,4,4,4,4,24,15,39,78,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,Mathematics,5,5,5,5,5,5,30,15,40,85,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,Science,3,3,3,3,3,3,18,15,41,74,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,Social Science,4,4,4,4,4,4,24,15,42,81,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_01,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,389,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,English,4,4,4,4,4,4,24,16,39,79,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,Urdu/Hindi,5,5,5,5,5,5,30,16,40,86,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,Mathematics,3,3,3,3,3,3,18,16,41,75,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,Science,4,4,4,4,4,4,24,16,42,82,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,Social Science,5,5,5,5,5,5,30,16,43,89,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_02,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,411,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,English,5,5,5,5,5,5,30,12,40,82,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,Urdu/Hindi,3,3,3,3,3,3,18,12,41,71,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,Mathematics,4,4,4,4,4,4,24,12,42,78,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,Science,5,5,5,5,5,5,30,12,43,85,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,Social Science,3,3,3,3,3,3,18,12,44,74,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_03,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,390,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,English,3,3,3,3,3,3,18,13,41,72,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,Urdu/Hindi,4,4,4,4,4,4,24,13,42,79,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,Mathematics,5,5,5,5,5,5,30,13,43,86,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,Science,3,3,3,3,3,3,18,13,44,75,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,Social Science,4,4,4,4,4,4,24,13,45,82,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_04,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,English,4,4,4,4,4,4,24,14,42,80,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,Science,4,4,4,4,4,4,24,14,45,83,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,Social Science,5,5,5,5,5,5,30,14,35,79,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_05,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,English,5,5,5,5,5,5,30,15,43,88,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,Science,5,5,5,5,5,5,30,15,35,80,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,Social Science,3,3,3,3,3,3,18,15,36,69,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_06,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,English,3,3,3,3,3,3,18,16,44,78,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,Science,3,3,3,3,3,3,18,16,36,70,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,Social Science,4,4,4,4,4,4,24,16,37,77,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_2_07,2,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,English,4,4,4,4,4,4,24,16,39,79,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,Urdu/Hindi,5,5,5,5,5,5,30,16,40,86,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,Mathematics,3,3,3,3,3,3,18,16,41,75,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,Science,4,4,4,4,4,4,24,16,42,82,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,Social Science,5,5,5,5,5,5,30,16,43,89,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_01,3,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,16,44,78,489,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,English,5,5,5,5,5,5,30,12,40,82,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,Urdu/Hindi,3,3,3,3,3,3,18,12,41,71,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,Mathematics,4,4,4,4,4,4,24,12,42,78,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,Science,5,5,5,5,5,5,30,12,43,85,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,Social Science,3,3,3,3,3,3,18,12,44,74,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_02,3,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,12,45,81,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,English,3,3,3,3,3,3,18,13,41,72,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,Urdu/Hindi,4,4,4,4,4,4,24,13,42,79,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,Mathematics,5,5,5,5,5,5,30,13,43,86,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,Science,3,3,3,3,3,3,18,13,44,75,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,Social Science,4,4,4,4,4,4,24,13,45,82,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_03,3,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,13,35,78,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,English,4,4,4,4,4,4,24,14,42,80,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,Science,4,4,4,4,4,4,24,14,45,83,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,Social Science,5,5,5,5,5,5,30,14,35,79,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_04,3,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,14,36,68,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,English,5,5,5,5,5,5,30,15,43,88,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,Science,5,5,5,5,5,5,30,15,35,80,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,Social Science,3,3,3,3,3,3,18,15,36,69,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_05,3,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,15,37,76,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,English,3,3,3,3,3,3,18,16,44,78,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,Science,3,3,3,3,3,3,18,16,36,70,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,Social Science,4,4,4,4,4,4,24,16,37,77,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_06,3,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,16,38,84,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,English,4,4,4,4,4,4,24,12,45,81,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,Science,4,4,4,4,4,4,24,12,37,73,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,Social Science,5,5,5,5,5,5,30,12,38,80,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_3_07,3,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,12,39,69,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,English,5,5,5,5,5,5,30,12,40,82,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,Urdu/Hindi,3,3,3,3,3,3,18,12,41,71,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,Mathematics,4,4,4,4,4,4,24,12,42,78,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,Science,5,5,5,5,5,5,30,12,43,85,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,Social Science,3,3,3,3,3,3,18,12,44,74,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_01,4,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,12,45,81,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,English,3,3,3,3,3,3,18,13,41,72,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,Urdu/Hindi,4,4,4,4,4,4,24,13,42,79,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,Mathematics,5,5,5,5,5,5,30,13,43,86,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,Science,3,3,3,3,3,3,18,13,44,75,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,Social Science,4,4,4,4,4,4,24,13,45,82,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_02,4,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,13,35,78,472,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,English,4,4,4,4,4,4,24,14,42,80,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,Science,4,4,4,4,4,4,24,14,45,83,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,Social Science,5,5,5,5,5,5,30,14,35,79,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_03,4,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,14,36,68,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,English,5,5,5,5,5,5,30,15,43,88,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,Science,5,5,5,5,5,5,30,15,35,80,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,Social Science,3,3,3,3,3,3,18,15,36,69,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_04,4,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,15,37,76,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,English,3,3,3,3,3,3,18,16,44,78,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,Science,3,3,3,3,3,3,18,16,36,70,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,Social Science,4,4,4,4,4,4,24,16,37,77,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_05,4,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,16,38,84,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,English,4,4,4,4,4,4,24,12,45,81,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,Science,4,4,4,4,4,4,24,12,37,73,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,Social Science,5,5,5,5,5,5,30,12,38,80,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_06,4,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,12,39,69,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,English,5,5,5,5,5,5,30,13,35,78,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,Urdu/Hindi,3,3,3,3,3,3,18,13,36,67,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,Mathematics,4,4,4,4,4,4,24,13,37,74,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,Science,5,5,5,5,5,5,30,13,38,81,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,Social Science,3,3,3,3,3,3,18,13,39,70,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_4_07,4,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,13,40,77,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,English,3,3,3,3,3,3,18,13,41,72,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,Urdu/Hindi,4,4,4,4,4,4,24,13,42,79,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,Mathematics,5,5,5,5,5,5,30,13,43,86,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,Science,3,3,3,3,3,3,18,13,44,75,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,Social Science,4,4,4,4,4,4,24,13,45,82,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_01,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,394,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,English,4,4,4,4,4,4,24,14,42,80,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,Science,4,4,4,4,4,4,24,14,45,83,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,Social Science,5,5,5,5,5,5,30,14,35,79,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_02,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,405,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,English,5,5,5,5,5,5,30,15,43,88,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,Science,5,5,5,5,5,5,30,15,35,80,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,Social Science,3,3,3,3,3,3,18,15,36,69,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_03,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,398,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,English,3,3,3,3,3,3,18,16,44,78,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,Science,3,3,3,3,3,3,18,16,36,70,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,Social Science,4,4,4,4,4,4,24,16,37,77,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_04,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,English,4,4,4,4,4,4,24,12,45,81,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,Science,4,4,4,4,4,4,24,12,37,73,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,Social Science,5,5,5,5,5,5,30,12,38,80,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_05,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,English,5,5,5,5,5,5,30,13,35,78,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,Urdu/Hindi,3,3,3,3,3,3,18,13,36,67,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,Mathematics,4,4,4,4,4,4,24,13,37,74,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,Science,5,5,5,5,5,5,30,13,38,81,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,Social Science,3,3,3,3,3,3,18,13,39,70,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_06,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,English,3,3,3,3,3,3,18,14,36,68,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,Urdu/Hindi,4,4,4,4,4,4,24,14,37,75,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,Mathematics,5,5,5,5,5,5,30,14,38,82,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,Science,3,3,3,3,3,3,18,14,39,71,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,Social Science,4,4,4,4,4,4,24,14,40,78,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_5_07,5,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,English,4,4,4,4,4,4,24,14,42,80,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,Urdu/Hindi,5,5,5,5,5,5,30,14,43,87,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,Mathematics,3,3,3,3,3,3,18,14,44,76,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,Science,4,4,4,4,4,4,24,14,45,83,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,Social Science,5,5,5,5,5,5,30,14,35,79,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_01,6,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,14,36,68,473,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,English,5,5,5,5,5,5,30,15,43,88,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,Science,5,5,5,5,5,5,30,15,35,80,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,Social Science,3,3,3,3,3,3,18,15,36,69,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_02,6,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,15,37,76,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,English,3,3,3,3,3,3,18,16,44,78,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,Science,3,3,3,3,3,3,18,16,36,70,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,Social Science,4,4,4,4,4,4,24,16,37,77,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_03,6,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,16,38,84,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,English,4,4,4,4,4,4,24,12,45,81,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,Science,4,4,4,4,4,4,24,12,37,73,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,Social Science,5,5,5,5,5,5,30,12,38,80,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_04,6,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,12,39,69,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,English,5,5,5,5,5,5,30,13,35,78,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,Urdu/Hindi,3,3,3,3,3,3,18,13,36,67,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,Mathematics,4,4,4,4,4,4,24,13,37,74,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,Science,5,5,5,5,5,5,30,13,38,81,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,Social Science,3,3,3,3,3,3,18,13,39,70,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_05,6,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,13,40,77,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,English,3,3,3,3,3,3,18,14,36,68,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,Urdu/Hindi,4,4,4,4,4,4,24,14,37,75,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,Mathematics,5,5,5,5,5,5,30,14,38,82,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,Science,3,3,3,3,3,3,18,14,39,71,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,Social Science,4,4,4,4,4,4,24,14,40,78,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_06,6,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,14,41,85,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,English,4,4,4,4,4,4,24,15,37,76,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,Urdu/Hindi,5,5,5,5,5,5,30,15,38,83,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,Mathematics,3,3,3,3,3,3,18,15,39,72,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,Science,4,4,4,4,4,4,24,15,40,79,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,Social Science,5,5,5,5,5,5,30,15,41,86,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_6_07,6,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,15,42,75,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,English,5,5,5,5,5,5,30,15,43,88,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,Urdu/Hindi,3,3,3,3,3,3,18,15,44,77,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,Mathematics,4,4,4,4,4,4,24,15,45,84,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,Science,5,5,5,5,5,5,30,15,35,80,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,Social Science,3,3,3,3,3,3,18,15,36,69,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_01,7,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,15,37,76,474,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,English,3,3,3,3,3,3,18,16,44,78,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,Science,3,3,3,3,3,3,18,16,36,70,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,Social Science,4,4,4,4,4,4,24,16,37,77,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_02,7,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,16,38,84,475,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,English,4,4,4,4,4,4,24,12,45,81,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,Science,4,4,4,4,4,4,24,12,37,73,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,Social Science,5,5,5,5,5,5,30,12,38,80,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_03,7,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,12,39,69,446,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,English,5,5,5,5,5,5,30,13,35,78,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,Urdu/Hindi,3,3,3,3,3,3,18,13,36,67,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,Mathematics,4,4,4,4,4,4,24,13,37,74,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,Science,5,5,5,5,5,5,30,13,38,81,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,Social Science,3,3,3,3,3,3,18,13,39,70,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_04,7,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,13,40,77,447,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,English,3,3,3,3,3,3,18,14,36,68,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,Urdu/Hindi,4,4,4,4,4,4,24,14,37,75,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,Mathematics,5,5,5,5,5,5,30,14,38,82,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,Science,3,3,3,3,3,3,18,14,39,71,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,Social Science,4,4,4,4,4,4,24,14,40,78,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_05,7,demo,Kashmiri/Dogri/Punjabi,5,5,5,5,5,5,30,14,41,85,459,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,English,4,4,4,4,4,4,24,15,37,76,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,Urdu/Hindi,5,5,5,5,5,5,30,15,38,83,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,Mathematics,3,3,3,3,3,3,18,15,39,72,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,Science,4,4,4,4,4,4,24,15,40,79,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,Social Science,5,5,5,5,5,5,30,15,41,86,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_06,7,demo,Kashmiri/Dogri/Punjabi,3,3,3,3,3,3,18,15,42,75,471,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,English,5,5,5,5,5,5,30,16,38,84,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,Urdu/Hindi,3,3,3,3,3,3,18,16,39,73,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,Mathematics,4,4,4,4,4,4,24,16,40,80,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,Science,5,5,5,5,5,5,30,16,41,87,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,Social Science,3,3,3,3,3,3,18,16,42,76,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_7_07,7,demo,Kashmiri/Dogri/Punjabi,4,4,4,4,4,4,24,16,43,83,483,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,English,3,3,3,3,3,3,18,16,44,78,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,Urdu/Hindi,4,4,4,4,4,4,24,16,45,85,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,Mathematics,5,5,5,5,5,5,30,16,35,81,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,Science,3,3,3,3,3,3,18,16,36,70,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,Social Science,4,4,4,4,4,4,24,16,37,77,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_01,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,391,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,English,4,4,4,4,4,4,24,12,45,81,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,Urdu/Hindi,5,5,5,5,5,5,30,12,35,77,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,Mathematics,3,3,3,3,3,3,18,12,36,66,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,Science,4,4,4,4,4,4,24,12,37,73,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,Social Science,5,5,5,5,5,5,30,12,38,80,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_02,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,377,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,English,5,5,5,5,5,5,30,13,35,78,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,Urdu/Hindi,3,3,3,3,3,3,18,13,36,67,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,Mathematics,4,4,4,4,4,4,24,13,37,74,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,Science,5,5,5,5,5,5,30,13,38,81,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,Social Science,3,3,3,3,3,3,18,13,39,70,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_03,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,370,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,English,3,3,3,3,3,3,18,14,36,68,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,Urdu/Hindi,4,4,4,4,4,4,24,14,37,75,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,Mathematics,5,5,5,5,5,5,30,14,38,82,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,Science,3,3,3,3,3,3,18,14,39,71,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,Social Science,4,4,4,4,4,4,24,14,40,78,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_04,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,374,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,English,4,4,4,4,4,4,24,15,37,76,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,Urdu/Hindi,5,5,5,5,5,5,30,15,38,83,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,Mathematics,3,3,3,3,3,3,18,15,39,72,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,Science,4,4,4,4,4,4,24,15,40,79,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,Social Science,5,5,5,5,5,5,30,15,41,86,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_05,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,396,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,English,5,5,5,5,5,5,30,16,38,84,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,Urdu/Hindi,3,3,3,3,3,3,18,16,39,73,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,Mathematics,4,4,4,4,4,4,24,16,40,80,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,Science,5,5,5,5,5,5,30,16,41,87,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,Social Science,3,3,3,3,3,3,18,16,42,76,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_06,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,400,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,English,3,3,3,3,3,3,18,12,39,69,379,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,Urdu/Hindi,4,4,4,4,4,4,24,12,40,76,379,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,Mathematics,5,5,5,5,5,5,30,12,41,83,379,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,Science,3,3,3,3,3,3,18,12,42,72,379,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,Social Science,4,4,4,4,4,4,24,12,43,79,379,Dummy,"Dummy grade, not the school's scale.",dummy
+Student_8_07,8,demo,Kashmiri/Dogri/Punjabi,0,0,0,0,0,0,0,0,0,0,379,Dummy,"Dummy grade, not the school's scale.",dummy

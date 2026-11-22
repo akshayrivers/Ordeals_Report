@@ -1,10 +1,26 @@
 import { el } from "../ui";
 
 const JOBS = [
-  { href: "#/import", label: "Import", text: "Drop a CSV or xlsx. Accepted rows stay in the browser database." },
-  { href: "#/marks", label: "Marks", text: "Class 8 check for session 2023-24. Pattern and rank sit on this page." },
-  { href: "#/schedule", label: "Schedule", text: "An empty exam list. There is no school timetable in the folder." },
-  { href: "#/cards", label: "Cards", text: "Report cards for 2023-24. Father names are placeholders." },
+  {
+    href: "#/import",
+    label: "Import",
+    text: "A full mark table, and one student at a time. Edits stay in this browser.",
+  },
+  {
+    href: "#/marks",
+    label: "Marks",
+    text: "Pick a class, then open the exam format on its own view.",
+  },
+  {
+    href: "#/schedule",
+    label: "Schedule",
+    text: "A month grid. Demo dates are labeled demo. The school workbook has no exam dates.",
+  },
+  {
+    href: "#/cards",
+    label: "Cards",
+    text: "One card at a time, then paper size and margins, then a batch PDF.",
+  },
 ];
 
 export function mountHome(root: HTMLElement): void {
@@ -14,7 +30,7 @@ export function mountHome(root: HTMLElement): void {
     el(
       "p",
       "quiet",
-      "Pick a job below. Import, marks, the exam list, and report cards are separate pages. Nothing is uploaded.",
+      "The page opens on made-up classes 1–8 so the screens are not empty. Switch to the real class 8 register when you want Student_01 from data.csv. Nothing is uploaded.",
     ),
   );
   const list = el("div", "jobs");

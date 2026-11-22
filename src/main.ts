@@ -3,7 +3,8 @@ import { mountHome } from "./pages/home";
 import { mountImport } from "./pages/import";
 import { mountMarks } from "./pages/marks";
 import { mountSchedule } from "./pages/schedule";
-import { publish, setStore, state } from "./state";
+import { prepareExam } from "./schedule";
+import { adoptWorking, publish, setStore, showDataset, state, subscribe } from "./state";
 import { openStore } from "./store";
 import "./style.css";
 import { el } from "./ui";
@@ -55,7 +56,33 @@ function shell(): void {
     el("span", undefined, "Govt. Middle School Yug · Zone Jib"),
     el("span", undefined, "Data stays on this computer"),
   );
-  app!.replaceChildren(header, nav, page, footer);
+  const dataset = el("div", "dataset");
+  dataset.setAttribute("role", "group");
+  dataset.setAttribute("aria-label", "Which set of rows is open");
+  const demo = el("button", "chip", "Demo classes 1–8");
+  demo.type = "button";
+  demo.dataset.set = "demo";
+  const real = el("button", "chip", "Real class 8 register");
+  real.type = "button";
+  real.dataset.set = "register";
+  const datasetNote = el("p", "dataset-note");
+  dataset.append(demo, real, datasetNote);
+  demo.addEventListener("click", () => showDataset("demo"));
+  real.addEventListener("click", () => showDataset("register"));
+
+  app!.replaceChildren(header, nav, dataset, page, footer);
+
+  const paintDataset = () => {
+    const current = state.dataset;
+    demo.classList.toggle("active", current === "demo");
+    real.classList.toggle("active", current === "register");
+    datasetNote.textContent =
+      current === "demo"
+        ? "Demo classes 1–8 are made up so the screens can be tried. They were not collected at the school. data.csv is not changed."
+        : "Real class 8 register from data.csv. Session 2023-24. Edits stay in this browser and do not change the file.";
+  };
+  paintDataset();
+  subscribe(paintDataset);
 }
 
 function renderRoute(): void {
@@ -82,12 +109,30 @@ void openStore()
   .then(async (opened) => {
     setStore(opened);
     state.exams = await opened.readExams();
+    const demoSaved = await opened.readWorking("demo");
+    const registerSaved = await opened.readWorking("register");
+    if (demoSaved) adoptWorking("demo", demoSaved);
+    if (registerSaved) adoptWorking("register", registerSaved);
     state.dbNote = opened.persistent
-      ? "Browser database is ready on this computer. data.csv is what Marks shows until you drop a file."
-      : "The browser database did not stay on disk. data.csv still loads. Exams stay until you refresh.";
+      ? "Browser database is ready on this computer. Edits stay here and do not change data.csv."
+      : "The browser database did not stay on disk. The demo file and data.csv still load. Exams you add stay until you refresh.";
     publish();
   })
   .catch((error: unknown) => {
-    state.dbNote = error instanceof Error ? error.message : "The browser database did not start. data.csv still loads.";
+    state.dbNote = error instanceof Error ? error.message : "The browser database did not start. The demo file and data.csv still load.";
     publish();
+  });
+
+void fetch("/api/local-schedule")
+  .then((response) => (response.ok ? response.json() : null))
+  .then((data: { note?: string; exams?: { className: string; subject: string; date: string; room: string }[] } | null) => {
+    if (!data) return;
+    if (data.note) state.scheduleNote = data.note;
+    state.parsedExams = (data.exams ?? []).map((exam, index) =>
+      prepareExam({ ...exam, origin: "parsed" }, 20000 + index),
+    );
+    publish();
+  })
+  .catch(() => {
+    /* The page already says no school timetable was loaded. */
   });

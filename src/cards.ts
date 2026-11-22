@@ -6,18 +6,58 @@ type ReadyReport = Extract<Report, { ok: true }>;
 
 const ink = rgb(0.1, 0.08, 0.06);
 
+export type PaperSize = "A4" | "A5" | "Letter";
+
 export type CardLayout = {
   showFather: boolean;
   showFormativeColumns: boolean;
   showUnusedNote: boolean;
+  paper: PaperSize;
+  marginMm: number;
+  scale: number;
+  rowHeight: number;
 };
 
-/** School card: father's line, F1–F6, and the unused-subject note already on these pages. */
+/** School card: A4, father's line, F1–F6, and the unused-subject note. */
 export const SCHOOL_LAYOUT: CardLayout = {
   showFather: true,
   showFormativeColumns: true,
   showUnusedNote: true,
+  paper: "A4",
+  marginMm: 12,
+  scale: 1,
+  rowHeight: 28,
 };
+
+export const PAPER_PT: Record<PaperSize, [number, number]> = {
+  A4: [595.28, 841.89],
+  A5: [419.53, 595.28],
+  Letter: [612, 792],
+};
+
+export const PAPER_RATIO: Record<PaperSize, string> = {
+  A4: "210 / 297",
+  A5: "148 / 210",
+  Letter: "8.5 / 11",
+};
+
+export function clampLayout(layout: CardLayout): CardLayout {
+  const paper = layout.paper === "A5" || layout.paper === "Letter" ? layout.paper : "A4";
+  return {
+    showFather: layout.showFather,
+    showFormativeColumns: layout.showFormativeColumns,
+    showUnusedNote: layout.showUnusedNote,
+    paper,
+    marginMm: clampNum(layout.marginMm, 8, 36),
+    scale: clampNum(layout.scale, 0.75, 1.4),
+    rowHeight: clampNum(layout.rowHeight, 16, 48),
+  };
+}
+
+function clampNum(value: number, min: number, max: number): number {
+  if (!Number.isFinite(value)) return min;
+  return Math.min(max, Math.max(min, value));
+}
 
 export type CardOptions = {
   fathers: Readonly<Record<string, string>>;
@@ -145,15 +185,25 @@ function drawCard(
   options: CardOptions,
 ): void {
   const { width, height } = page.getSize();
-  const columns = columnsFor(student, options.layout.showFormativeColumns);
+  const layout = clampLayout(options.layout);
+  const scale = layout.scale;
+  const margin = layout.marginMm * (72 / 25.4);
+  const rowH = layout.rowHeight * scale;
+  const headerH = 32 * scale;
+  const rawColumns = columnsFor(student, layout.showFormativeColumns);
+  const baseWidth = rawColumns.reduce((total, column) => total + column.width, 0);
+  const inner = Math.max(140, width - margin * 2);
+  const fit = Math.min(1, inner / (baseWidth * scale));
+  const drawScale = scale * fit;
+  const columns = rawColumns.map((column) => ({ ...column, width: column.width * drawScale }));
   const tableWidth = columns.reduce((total, column) => total + column.width, 0);
-  const left = (width - tableWidth) / 2;
+  const left = margin + Math.max(0, (inner - tableWidth) / 2);
 
   const school = "GOVT. MIDDLE SCHOOL YUG (ZONE JIB)";
-  const schoolSize = 13;
+  const schoolSize = 13 * scale;
   const schoolWidth = bold.widthOfTextAtSize(school, schoolSize);
   const schoolX = (width - schoolWidth) / 2;
-  const schoolY = height - 58;
+  const schoolY = height - margin - 24 * scale;
   page.drawText(school, { x: schoolX, y: schoolY, size: schoolSize, font: bold, color: ink });
   page.drawLine({
     start: { x: schoolX, y: schoolY - 3 },
@@ -163,10 +213,10 @@ function drawCard(
   });
 
   const title = "REPORT CARD";
-  const titleSize = 12;
+  const titleSize = 12 * scale;
   const titleWidth = bold.widthOfTextAtSize(title, titleSize);
   const titleX = (width - titleWidth) / 2;
-  const titleY = schoolY - 28;
+  const titleY = schoolY - 28 * scale;
   page.drawText(title, { x: titleX, y: titleY, size: titleSize, font: bold, color: ink });
   page.drawLine({
     start: { x: titleX, y: titleY - 3 },
@@ -175,7 +225,7 @@ function drawCard(
     color: ink,
   });
 
-  const labelSize = 10;
+  const labelSize = 10 * scale;
   const drawField = (label: string, value: string, x: number, y: number, line: number) => {
     page.drawText(label, { x, y, size: labelSize, font: regular, color: ink });
     const labelWidth = regular.widthOfTextAtSize(label, labelSize);
@@ -191,24 +241,22 @@ function drawCard(
     }
   };
 
-  const father = options.layout.showFather ? (options.fathers[student.studentId] ?? "") : "";
+  const father = layout.showFather ? (options.fathers[student.studentId] ?? "") : "";
   const right = left + tableWidth / 2 + 8;
-  drawField("NAME:", "", left, titleY - 36, 180);
-  drawField("CLASS:", report.className, right, titleY - 36, 80);
-  drawField("FATHER'S NAME:", father, left, titleY - 58, 150);
-  drawField("ROLL NO.:", student.studentId, right, titleY - 58, 110);
-  drawField("GRADE:", student.grade, left, titleY - 80, 80);
-  drawField("YEAR:", report.session, right, titleY - 80, 90);
+  drawField("NAME:", "", left, titleY - 36 * scale, 180 * scale);
+  drawField("CLASS:", student.className || report.className, right, titleY - 36 * scale, 80 * scale);
+  drawField("FATHER'S NAME:", father, left, titleY - 58 * scale, 150 * scale);
+  drawField("ROLL NO.:", student.studentId, right, titleY - 58 * scale, 110 * scale);
+  drawField("GRADE:", student.grade, left, titleY - 80 * scale, 80 * scale);
+  drawField("YEAR:", report.session, right, titleY - 80 * scale, 90 * scale);
 
-  const printLines = wrap(regular, printDateLine(options.generatedAt), 8, tableWidth);
-  let cursor = titleY - 100;
+  const printLines = wrap(regular, printDateLine(options.generatedAt), 8 * scale, tableWidth);
+  let cursor = titleY - 100 * scale;
   for (const line of printLines) {
     page.drawText(line, { x: left, y: cursor, size: 8, font: regular, color: ink });
-    cursor -= 11;
+    cursor -= 11 * scale;
   }
 
-  const headerH = 32;
-  const rowH = 28;
   const rows = student.subjects.length + 1;
   const tableTop = cursor - 8;
   const tableBottom = tableTop - headerH - rows * rowH;
@@ -299,7 +347,7 @@ function drawCard(
 
   cursor -= 18;
   const unused = student.subjects.filter((subject) => subject.unused).map((subject) => subject.cardName);
-  if (options.layout.showUnusedNote && unused.length) {
+  if (layout.showUnusedNote && unused.length) {
     const note = `${unused.join(", ")} is 0 for every student in this file, so a percentage is out of ${student.countedMax}, not 600.`;
     for (const line of wrap(regular, note, 8, tableWidth)) {
       page.drawText(line, { x: left, y: cursor, size: 8, font: regular, color: ink });
@@ -340,8 +388,9 @@ export async function buildCards(report: ReadyReport, options: CardOptions): Pro
   const regular = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
 
+  const size = PAPER_PT[clampLayout(options.layout).paper];
   for (const student of report.students) {
-    const page = pdf.addPage([595.28, 841.89]);
+    const page = pdf.addPage(size);
     drawCard(page, regular, bold, student, report, options);
   }
   return pdf.save();

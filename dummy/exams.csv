@@ -1,0 +1,11 @@
+class,subject,date,room,label
+1,English,2026-11-03,Room 1,dummy
+2,Mathematics,2026-11-03,Room 2,dummy
+3,Science/EVS,2026-11-06,Room 1,dummy
+4,Social Science,2026-11-10,Room 1,dummy
+5,Hindi/Urdu,2026-11-13,Room 2,dummy
+6,English,2026-11-17,Room 1,dummy
+7,Mathematics,2026-11-20,Room 2,dummy
+8,Science/EVS,2026-11-24,Room 1,dummy
+1,Hindi/Urdu,2026-11-27,Room 2,dummy
+4,English,2026-11-27,Room 1,dummy

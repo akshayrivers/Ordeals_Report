@@ -1,5 +1,7 @@
 import { assumedDatePhrase, generationStamp } from "./dates";
 
+export type ExamOrigin = "entered" | "dummy" | "parsed";
+
 export type ExamRow = {
   id: number;
   className: string;
@@ -7,6 +9,7 @@ export type ExamRow = {
   date: string;
   dateAssumed: boolean;
   room: string;
+  origin: ExamOrigin;
 };
 
 export type ExamDraft = {
@@ -15,6 +18,7 @@ export type ExamDraft = {
   date: string;
   room: string;
   now?: Date;
+  origin?: ExamOrigin;
 };
 
 export function prepareExam(draft: ExamDraft, id: number): ExamRow {
@@ -28,10 +32,13 @@ export function prepareExam(draft: ExamDraft, id: number): ExamRow {
     date: assumed ? generationStamp(now).iso : typed,
     dateAssumed: assumed,
     room: draft.room.trim(),
+    origin: draft.origin ?? "entered",
   };
 }
 
 export function examDateText(row: ExamRow): string {
+  if (row.origin === "dummy") return `${row.date} (demo date, not from the school)`;
+  if (row.origin === "parsed") return `${row.date} (parsed from the file)`;
   if (!row.dateAssumed) return row.date;
   const [year, month, day] = row.date.split("-").map((part) => Number(part));
   if (!year || !month || !day) return `${row.date} (assumed — generated, not a date from the school)`;

@@ -116,6 +116,7 @@ export type SubjectCell = {
 
 export type StudentResult = {
   studentId: string;
+  className: string;
   grade: string;
   grandTotal: number | null;
   countedTotal: number | null;
@@ -448,8 +449,10 @@ export function checkRows(rows: MarkRow[]): Report {
       ? (countedValues as number[]).reduce((total, value) => total + value, 0)
       : null;
 
+    const classNames = [...new Set(list.map((row) => row.className))];
     return {
       studentId,
+      className: classNames.length === 1 ? classNames[0] : classNames.join(", "),
       grade: grades.length === 1 ? grades[0] : grades.filter(Boolean).join(" / "),
       grandTotal: grand,
       countedTotal,
@@ -471,4 +474,58 @@ export function checkRows(rows: MarkRow[]): Report {
     session: sessions.length === 1 ? sessions[0] : sessions.join(", "),
     className: classes.length === 1 ? classes[0] : classes.join(", "),
   };
+}
+
+function subjectIsZero(subject: SubjectCell): boolean {
+  const marks = subject.marks;
+  return (
+    subject.total === 0 &&
+    [marks.f1, marks.f2, marks.f3, marks.f4, marks.f5, marks.f6, marks.fa, marks.activities, marks.summative].every(
+      (value) => value === 0,
+    )
+  );
+}
+
+/** Unused means every student in this group stored that subject as zero. */
+export function applyClassUnused(students: StudentResult[]): StudentResult[] {
+  if (students.length === 0) return [];
+  const names = students[0].subjects.map((subject) => subject.registerName);
+  const unused = new Set(
+    names.filter((name) =>
+      students.every((student) => {
+        const subject = student.subjects.find((item) => item.registerName === name);
+        return subject ? subjectIsZero(subject) : false;
+      }),
+    ),
+  );
+  return students.map((student) => {
+    const subjects = student.subjects.map((subject) => ({
+      ...subject,
+      unused: unused.has(subject.registerName),
+    }));
+    const used = subjects.filter((subject) => !subject.unused);
+    const countedTotal = used.every((subject) => subject.total !== null)
+      ? used.reduce((total, subject) => total + (subject.total ?? 0), 0)
+      : null;
+    return {
+      ...student,
+      subjects,
+      countedMax: used.length * 100,
+      countedTotal,
+    };
+  });
+}
+
+export function presentForPrint(students: StudentResult[]): StudentResult[] {
+  const byClass = new Map<string, StudentResult[]>();
+  for (const student of students) {
+    const list = byClass.get(student.className) ?? [];
+    list.push(student);
+    byClass.set(student.className, list);
+  }
+  const adjusted = new Map<string, StudentResult>();
+  for (const group of byClass.values()) {
+    for (const student of applyClassUnused(group)) adjusted.set(student.studentId, student);
+  }
+  return students.map((student) => adjusted.get(student.studentId) ?? student);
 }
